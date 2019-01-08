@@ -36,6 +36,16 @@ public class TaskFrame extends JInternalFrame {
     public TaskFrame() {
         this.setSize(500, 300);
         //Q4: layout 出如圖所示的樣子，
+        JLabel label=new JLabel("Title:");
+        textTitle.setText(title);
+        this.add(label);
+        label.setBounds(0, 0, 50, 10);
+        this.add(textTitle);
+        textTitle.setBounds(250, 0, 250, 10);
+        this.add(textContent);
+        textContent.setBounds(0, 15, 500, 200);
+        textTitle.setVisible(true);
+        textContent.setVisible(true);
         //記得 JTextArea 要放在捲軸裡面 (30%)
         ////////////////////////////
         this.setClosable(true);
@@ -69,7 +79,8 @@ public class TaskFrame extends JInternalFrame {
             public void internalFrameClosing(InternalFrameEvent e) {
                 if (modified) {
                     //Q5: 發現變更，顯示 confirm dialog 詢問是否要儲存 (20%)
-                    int ret = -1;
+                   
+                    int ret = JOptionPane.showConfirmDialog(textContent, "是否要儲存?", "NOTE未儲存", JOptionPane.YES_NO_OPTION);
                     /////////////////////////////////////////////
                     if (ret == JOptionPane.YES_OPTION) {
                         TaskDB.save(getNoteTitle(), getNoteContent());
